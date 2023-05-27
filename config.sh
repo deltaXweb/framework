@@ -21,14 +21,15 @@ else
 fi
 
 # Richiesta del nome e della scelta del framework
-read -p "Inserisci il nome del progetto: " project_name
-read -p "Scegli il framework (boostrap/tailwind): " framework_choice
+read -p "Scegli il framework (bootstrap/tailwind): " framework_choice
 
-# Crea un oggetto JSON con i dati inseriti
-json=$(jq -n --arg project_name "$project_name" --arg framework_choice "$framework_choice" '{MAIN: {"NAME": $project_name, "LOGO":"","FAVICON":"favicon", "FRAMEWORK": $framework_choice}}')
+# Creazione del file JSON
+json="{\"MAIN\": {\"NAME\": \"$folder_name\", \"LOGO\": \"\", \"FAVICON\": \"favicon\", \"FRAMEWORK\": \"$framework_choice\"}}"
 
 # Crea un file JSON e scrivi l'oggetto JSON
 echo "$json" > "$folder_name/config.json"
+
+rm "$folder_name/config.sh"
 
 echo "Configurazione completata con successo."
 
